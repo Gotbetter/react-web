@@ -7,6 +7,7 @@ import "./App.css"
 
 
 function App() {
+  console.log("hello world!");
   return (
     <div className="app-container">
       <BrowserRouter>
