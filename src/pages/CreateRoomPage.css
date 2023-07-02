@@ -1,0 +1,124 @@
+*{
+    box-sizing: border-box;
+}
+.title{
+    font-size: 45px;
+}
+
+.my{
+    position: relative;
+    left: 350px;
+    border: solid 3px;
+    border-radius: 10px;
+    padding-left: 40px;
+    width: 700px;
+    font-size: 25px;
+    margin-top: 20px;
+    padding-right: 200px;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    background-color: #f5f5f5f5;
+}
+
+.my input{
+    width: 600px;
+    height: 40px;
+    border: solid 2px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-indent: 8px;
+}
+
+select{
+    width: 600px;
+    height: 40px;
+    border: solid 2px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-indent: 8px;
+}
+
+.my div{
+    padding-top: 30px;
+}
+
+.react-datepicker__input-container{
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+.react-datepicker__day--selected{
+    background-color: #555;
+    border-radius: 50%;
+    &:hover {
+        background-color: #555;
+        border-radius: 50%;
+      }
+}
+
+.react-datepicker__day {
+    &:hover {
+      border-radius: 50%;
+    }
+  }
+
+  .react-datepicker__header {
+    background-color: white;
+    border-bottom: none;
+    margin: 20px;
+  }
+
+  .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, 
+  .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
+    border-radius: 50%;
+    background-color: white;
+  }
+
+.selectRule button{
+    position: relative;
+    right: 3px;
+    width: 607px;
+    height: 55px;
+    border: solid 5px;
+    border-radius: 10px;
+    background-color: #555;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    border: solid 3px;
+}
+
+.selectRule div{
+    padding-top: 0;
+}
+
+.btn2{
+    padding-top: 10px !important;
+}
+
+.ing div{
+    padding-top: 0;
+}
+
+.submitButton button{
+    position: relative;
+    right: 3px;
+    width: 607px;
+    height: 55px;
+    border: solid 5px;
+    border-radius: 10px;
+    background-color:#555;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    border: solid 3px;
+}
+
+.back{
+    width: 10px;
+    position: absolute;
+    height: 10px;
+    cursor: pointer;
+}
+
+
+
