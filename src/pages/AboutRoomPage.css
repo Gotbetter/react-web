@@ -1,0 +1,40 @@
+.mine{
+    text-align: center;
+}
+
+.roomTitle{
+    font-size: 45px;
+    margin-top: 20px;
+}
+
+.sp{
+    margin-top: 20px;
+}
+
+.sp1, .sp2{
+    border: solid 3px;
+    font-size: 30px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.sp1{
+    margin-right: 10px;
+}
+
+.sp2{
+    margin-left: 10px;
+}
+
+.party{
+    margin-top: 30px !important;
+    width: 500px;
+    height: 500px;
+    border: solid 3px;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
