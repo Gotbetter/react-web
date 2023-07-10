@@ -9,7 +9,6 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import {IoIosArrowBack} from "react-icons/io"
 
-
 export default function CreateRoomPage () {
    
     const [roomName, setRoomName] = useState("");
@@ -18,8 +17,11 @@ export default function CreateRoomPage () {
     const [week, setWeek] = useState(1);
     const [entryFee, setEntryFee] = useState(5000);
     const [account, setAccount] = useState("");
-    const [rule, setRule] = useState(1);
+    const [rule, setRule] = useState("R1");
     const currentWeek = 1;
+    const [participantID, setParticipantId] = useState("");
+    const [roomCategory, setRoomCategory] = useState("");
+    const [roomDescription, setRoomDescription] = useState("");
 
     const dateNum = moment(startDate).format('YYYY-MM-DD'); // 달력에서 선택한 날짜 포맷 2023-06-23
     const maxNum = Number(roomPersonnel); // 선택된 값 모두 서버에서 지정한 데이터 타입인 숫자로 변환
@@ -30,6 +32,8 @@ export default function CreateRoomPage () {
     console.log("방 이름: ", roomName);
     console.log("방 인원: ", roomPersonnel);
     console.log("방 규칙 번호: ", rule);
+    console.log("방 카테고리: ", roomCategory);
+    console.log("방 소개글: ", roomDescription);
 
     const createArray = (a) => {
         let arr = [];
@@ -64,12 +68,25 @@ export default function CreateRoomPage () {
             week: weekNum,
             current_week: currentWeek,
             entry_fee: feeNum,
-            rule_id: rule,
-            account: account
+            rule_code: rule,
+            account: account,
+            room_category_code: roomCategory,
+            description: roomDescription,
             }, {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}})
 
             console.log('서버 응답 데이터: ', response);
+            setParticipantId(response.data.participant_id);
+            console.log(participantID);
             backToHomePage(); // 방 성공적으로 생성 후 홈페이지로 돌아가기
+                /*try {
+                    const response2 = await instance.post('/plans', {participant_id: participantID});
+                    console.log("방장 계획 데이터 공간 생성 완료!");
+                    console.log(response2);
+                }
+
+                catch(error) {
+                    console.log("방장 계획 데이터 공간 생성 실패!");
+                }*/
         
         }
         catch(error){
@@ -86,11 +103,11 @@ export default function CreateRoomPage () {
     }
 
     const ruleHandler = () => {
-        setRule(1);
+        setRule("R1");
     }
 
     const ruleHandler2 = () => {
-        setRule(2);
+        setRule("R2");
     }
     
     return ( // 주차는 48주까지 map으로 돌리기 참가비는 10만원까지 
@@ -100,6 +117,16 @@ export default function CreateRoomPage () {
             <div className="my">
             <div><h3>스터디룸 이름</h3>
             <input className="inputStyle" onChange={(e) => setRoomName(e.target.value)}></input>
+            </div>
+
+            <div>
+                <h3>방 카테고리</h3>
+                <input className="inputStyle" onChange={(e) => setRoomCategory(e.target.value)}></input>
+            </div>
+
+            <div>
+                <h3>방 소개글</h3>
+                <input className="inputStyle" onChange={(e) => setRoomDescription(e.target.value)}></input>
             </div>
 
             <div><h3>인원</h3>
