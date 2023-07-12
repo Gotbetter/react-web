@@ -1,6 +1,6 @@
 .mine{
     text-align: center;
-    height: 800px;
+    height: 1000px;
 }
 
 .roomTitle{
@@ -89,4 +89,15 @@
     border-radius: 10px;
     padding-top: 15px;
     font-size: 20px;
+}
+.roominformation{
+    position: relative;
+    bottom: 650px;
+    left: 70px;
+    border: 3px solid;
+    border-radius: 10px;
+    width: 350px;
+    height: 220px;
+    font-size: 20px;
+    padding-top: 20px;
 }

@@ -5,6 +5,7 @@ import './AboutRoomPage.css';
 import Participants from "../components/Participants";
 import moment from "moment";
 import Ranking from "../components/Ranking";
+import RoomInformation from "../components/RoomInformation";
 
 export default function AboutRoomPage () {
 
@@ -156,7 +157,6 @@ export default function AboutRoomPage () {
     useEffect(() => {getCurrentWeekPlan4();}, [planId]);
 
     console.log('사용자 아이디:', authId, '사용자 목록:', participantsInfo, '방 정보:', roomInfor);
-   
     return (    
         <div className="mine">
             <h1 className="roomTitle">{roomInfor.title}</h1>
@@ -179,9 +179,16 @@ export default function AboutRoomPage () {
                 email={item.email} userName={item.userName} planId={planId} week={roomInfor.week} participantId={item.participantId}/>))}
             </div>
         </div>
+
         <div className="rank">
                 <h3>현재 랭킹</h3>
-                <div>{rankingData.map((item) => (<Ranking key={item.rank} userName={item.username} rank={item.rank} refund={item.refund}/>))}</div>
+                {rankingData.map((item) => (<Ranking key={item.rank} userName={item.username} rank={item.rank} refund={item.refund}/>))}
+        </div>
+
+        <div className="roominformation">
+            <h3>방 정보</h3>
+            <RoomInformation title={roomInfor.title} maxUserNum={roomInfor.max_user_num} currentUserNum={roomInfor.current_user_num}
+            startDate={roomInfor.start_date} account={roomInfor.account} roomCode={roomInfor.room_code}/>
         </div>
 
         </div>
