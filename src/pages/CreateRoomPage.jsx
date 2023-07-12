@@ -19,9 +19,10 @@ export default function CreateRoomPage () {
     const [account, setAccount] = useState("");
     const [rule, setRule] = useState("R1");
     const currentWeek = 1;
-    const [participantID, setParticipantId] = useState("");
+    let participantID = '';
     const [roomCategory, setRoomCategory] = useState("");
     const [roomDescription, setRoomDescription] = useState("");
+
 
     const dateNum = moment(startDate).format('YYYY-MM-DD'); // 달력에서 선택한 날짜 포맷 2023-06-23
     const maxNum = Number(roomPersonnel); // 선택된 값 모두 서버에서 지정한 데이터 타입인 숫자로 변환
@@ -75,18 +76,17 @@ export default function CreateRoomPage () {
             }, {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}})
 
             console.log('서버 응답 데이터: ', response);
-            setParticipantId(response.data.participant_id);
-            console.log(participantID);
-            backToHomePage(); // 방 성공적으로 생성 후 홈페이지로 돌아가기
-                /*try {
-                    const response2 = await instance.post('/plans', {participant_id: participantID});
-                    console.log("방장 계획 데이터 공간 생성 완료!");
-                    console.log(response2);
-                }
+            participantID = response.data.participant_id;
+            try {
+                const response2 = await instance.post('/plans', {participant_id: participantID},
+                {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`}});
+                console.log("방장 계획 데이터 공간 생성 완료!");
+            }
 
-                catch(error) {
-                    console.log("방장 계획 데이터 공간 생성 실패!");
-                }*/
+            catch(error) {
+                console.log("방장 계획 데이터 공간 생성 실패!");
+            }
+            backToHomePage(); // 방 성공적으로 생성 후 홈페이지로 돌아가기
         
         }
         catch(error){
@@ -109,7 +109,7 @@ export default function CreateRoomPage () {
     const ruleHandler2 = () => {
         setRule("R2");
     }
-    
+
     return ( // 주차는 48주까지 map으로 돌리기 참가비는 10만원까지 
         <div>
             <span className="back" onClick={backToHomePage}><IoIosArrowBack size="50px"/></span>

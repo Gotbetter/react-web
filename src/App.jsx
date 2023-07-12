@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import SearchRoomPage from "./pages/SearchRoomPage";
 import CreateRoomPage from "./pages/CreateRoomPage";
 import AboutRoomPage from "./pages/AboutRoomPage";
+import AboutDetailPlan from "./pages/AboutDetailPlan";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/searchRoom" element={<SearchRoomPage />}/>
           <Route path="/createRoom" element={<CreateRoomPage />}/>
           <Route path="/aboutRoom" element={<AboutRoomPage />}/>
+          <Route path="/detailPlan" element={<AboutDetailPlan />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

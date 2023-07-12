@@ -55,7 +55,7 @@ export default function HomePage () {
         }
     }
     useEffect(() => {getInfo();}, []); // 방 정보 한번만 가져오도록 
-    console.log("confirm : ", roomInfor);
+    //console.log("confirm : ", roomInfor);
 
     return (
         <div>
