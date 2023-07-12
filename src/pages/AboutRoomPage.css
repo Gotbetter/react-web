@@ -1,6 +1,6 @@
 .mine{
     text-align: center;
-    
+    height: 800px;
 }
 
 .roomTitle{
@@ -78,4 +78,15 @@
 .dDay{
     position: relative;
     right: 400px;
+}
+
+.rank{
+    position: relative;
+    bottom: 1050px;
+    width: 400px;
+    left: 1000px;
+    border: solid 3px;
+    border-radius: 10px;
+    padding-top: 15px;
+    font-size: 20px;
 }

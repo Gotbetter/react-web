@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import './AboutRoomPage.css';
 import Participants from "../components/Participants";
 import moment from "moment";
+import Ranking from "../components/Ranking";
 
 export default function AboutRoomPage () {
 
@@ -18,6 +19,7 @@ export default function AboutRoomPage () {
     const [targetDate, setTargetDate] = useState('');
     const [planId, setPlanId] = useState(0);
     const [currentWeekPlan, setCurrentWeekPlan] = useState([]);
+    const [rankingData, setRankingData] = useState([]);
     const roomId = location.state.roomId;
 
     const getInfo = async () => { // 방 정보 가져오는 함수
@@ -131,18 +133,23 @@ export default function AboutRoomPage () {
         const differ = date1.diff(date0, 'd');
         const differ2 = fixDay.diff(date0, 'd');
         console.log('differ', differ, differ2, '시작, 끝, fix', startDate, targetDate, fixDay);
-
-        if (differ <= 0 ){
-            setDday('X');
-        }
-        else if (differ2 <= 0){
-            setDdayToFixDay('X');
-        }
         setDday(differ);
         setDdayToFixDay(differ2);
    }
+
+   const getRanking = async () => {
+        try{
+            const response = await instance.get(`/rooms/${roomId}/rank`,
+            {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}});
+            console.log(response);
+            setRankingData(response.data);
+        }
+        catch(error){
+            console.log('get ranking error');
+        }
+   }
     
-    useEffect(() => {getInfo(); getParticipantInfo(); getCurrentWeekPlan();}, []);
+    useEffect(() => {getInfo(); getParticipantInfo(); getCurrentWeekPlan(); getRanking();}, []);
     useEffect(() => {getCurrentWeekPlan2();}, [participantsInfo, authId]);
     useEffect(() => {getCurrentWeekPlan3();}, [participantId]);
     useEffect(() => {getDday();}, [startDate, targetDate]);
@@ -169,8 +176,14 @@ export default function AboutRoomPage () {
             <h3>참가자</h3>
             <div>
                 {participantsInfo.map((item) => (<Participants key={item.userId} authId={item.authId} 
-                email={item.email} userName={item.userName} planId={planId} week={roomInfor.week} participantId={item.participantId}/>))}</div>
+                email={item.email} userName={item.userName} planId={planId} week={roomInfor.week} participantId={item.participantId}/>))}
             </div>
+        </div>
+        <div className="rank">
+                <h3>현재 랭킹</h3>
+                <div>{rankingData.map((item) => (<Ranking key={item.rank} userName={item.username} rank={item.rank} refund={item.refund}/>))}</div>
+        </div>
+
         </div>
     )
 }

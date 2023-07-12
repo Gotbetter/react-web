@@ -3,6 +3,7 @@
     left: 470px;
     margin-top: 20px;
     margin-bottom: 460px;
+    overflow-x: hidden; 
 }
 
 .container2 input{
@@ -12,12 +13,14 @@
     border-radius: 10px;
     font-size: 17px;
     text-indent: 10px;
+    overflow-x: hidden;
 }
 
 .title2{
     font-size: 45px;
     position: relative;
     left: 120px;
+    overflow-x: hidden;
 }
 
 .join{
@@ -29,4 +32,5 @@
     color: white;
     background-color: #555;
     font-size: 17px;
+    overflow-x: hidden;
 }
