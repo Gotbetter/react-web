@@ -1,5 +1,6 @@
 .mine{
     text-align: center;
+    height: 1000px;
 }
 
 .roomTitle{
@@ -11,7 +12,7 @@
     margin-top: 20px;
 }
 
-.sp1, .sp2{
+.sp1, .sp2, .sp3, .sp4{
     border: solid 3px;
     font-size: 30px;
     border-radius: 10px;
@@ -26,6 +27,25 @@
     margin-left: 10px;
 }
 
+.sp3{
+    position: relative;
+    background-color: #555;
+    color: white;
+    bottom: 60px;
+    right: 50px;
+    width: 10px;
+    height: 20px;
+    font-size: 20px;
+}
+
+.sp4{
+    position: relative;
+    right: 223px;
+    background-color: #555;
+    color: white;
+    font-size: 20px;
+}
+
 .party{
     margin-top: 30px !important;
     width: 500px;
@@ -36,5 +56,48 @@
     padding-top: 20px;
     font-size: 20px;
     margin-bottom: 50px;
+    position: relative;
+    bottom: 500px;
 }
 
+.currentWeekPlan{
+    position: relative;
+    right: 20px;
+    top: 31px;
+    left: 70px;
+    padding-top: 20px;
+    border: solid 3px;
+    border-radius: 10px;
+    width: 350px;
+    height: 500px;
+    font-size: 20px;
+    bottom: 200px;
+
+}
+
+.dDay{
+    position: relative;
+    right: 400px;
+}
+
+.rank{
+    position: relative;
+    bottom: 1050px;
+    width: 400px;
+    left: 1000px;
+    border: solid 3px;
+    border-radius: 10px;
+    padding-top: 15px;
+    font-size: 20px;
+}
+.roominformation{
+    position: relative;
+    bottom: 650px;
+    left: 70px;
+    border: 3px solid;
+    border-radius: 10px;
+    width: 350px;
+    height: 220px;
+    font-size: 20px;
+    padding-top: 20px;
+}

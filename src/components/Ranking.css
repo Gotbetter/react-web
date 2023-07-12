@@ -1,0 +1,22 @@
+.left{
+    padding-right: 50px;
+    font-size: 30px;
+}
+
+.mid{
+    padding-right: 50px;
+    font-size: 30px;
+}
+
+.right{
+    font-size: 30px;
+}
+
+#a{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 3px solid;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

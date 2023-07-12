@@ -6,7 +6,7 @@ function Rooms({id, title, currentWeek, week, maxUserNum, currentUserNum, entryF
     const movePage = useNavigate();
     
     const moveToAboutRoomPage = () => {
-        console.log(id);
+        //console.log(id);
         movePage('/aboutRoom', {state: {roomId: id}});
     }
     return (
