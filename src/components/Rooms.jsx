@@ -1,12 +1,9 @@
 import React from 'react'
-import './Rooms.css'
+import '../componentsCssFile/Rooms.css'
 import { useNavigate } from 'react-router-dom';
 function Rooms({id, title, currentWeek, week, maxUserNum, currentUserNum, entryFee}) {
-    console.log('in room');
     const movePage = useNavigate();
-    
     const moveToAboutRoomPage = () => {
-        //console.log(id);
         movePage('/aboutRoom', {state: {roomId: id}});
     }
     return (

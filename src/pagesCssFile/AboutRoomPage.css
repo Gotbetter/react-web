@@ -49,7 +49,7 @@
 .party{
     margin-top: 30px !important;
     width: 500px;
-    height: 500px;
+    height: 700px;
     border: solid 3px;
     border-radius: 10px;
     margin: 0 auto;
@@ -60,19 +60,8 @@
     bottom: 500px;
 }
 
-.currentWeekPlan{
-    position: relative;
-    right: 20px;
-    top: 31px;
-    left: 70px;
-    padding-top: 20px;
-    border: solid 3px;
-    border-radius: 10px;
-    width: 350px;
-    height: 500px;
-    font-size: 20px;
-    bottom: 200px;
-
+.par{
+    margin-bottom: 20px;
 }
 
 .dDay{
@@ -82,17 +71,19 @@
 
 .rank{
     position: relative;
-    bottom: 1050px;
+    bottom: 1250px;
     width: 400px;
     left: 1000px;
     border: solid 3px;
     border-radius: 10px;
     padding-top: 15px;
     font-size: 20px;
+    margin: 0;
 }
+
 .roominformation{
     position: relative;
-    bottom: 650px;
+    bottom: 800px;
     left: 70px;
     border: 3px solid;
     border-radius: 10px;
@@ -100,4 +91,21 @@
     height: 220px;
     font-size: 20px;
     padding-top: 20px;
+}
+
+.joinbtn{
+    position: relative;
+    bottom: 1750px;
+    left: 480px;
+    width: 250px;
+    height: 50px;
+    background-color: #555;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.fcontainer{
+    display: flex;
+    flex-wrap: wrap;
 }

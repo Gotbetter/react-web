@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import instance from "../api/axios";
-//import requests from "../api/requests";
-import "./LoginPage.css"
-//import axios from "axios";
+import "../pagesCssFile/LoginPage.css"
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
@@ -26,9 +24,7 @@ export default function LoginPage() {
       });
 
         localStorage.setItem('access_token',response.data.access_token);
-        console.log(response.data.access_token);
         localStorage.setItem('refresh_token', response.data.refresh_token);
-        console.log(response);
         alert("로그인 완료!");
         goRooms();
 
@@ -47,8 +43,11 @@ export default function LoginPage() {
       {
         alert("비밀번호를 입력해 주세요!");
       }
-      else { // 아이디와 비밀번호가 등록되어 있지 않을 때
-        alert("아이디와 비밀번호를 확인해 주세요!");
+      else if (error.response.status === 404) { // 아이디와 비밀번호가 등록되어 있지 않을 때
+        alert("등록되어 있지 않은 회원입니다. 아이디와 비밀번호를 확인해 주세요!");
+      }
+      else if (error.response.status === 400) {
+        alert("요청 데이터 오류입니다. 다시 시도해 주세요.");
       }
     }
   }

@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import instance from "../api/axios";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import "./CreateRoomPage.css";
+import "../pagesCssFile/CreateRoomPage.css";
 import { ko } from 'date-fns/esm/locale';
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import 'moment/locale/ko';
 import {IoIosArrowBack} from "react-icons/io"
+
+import study from "../img/study.png";
+import diet from "../img/diet.png";
+import coding from "../img/coding.png";
+import emotion from "../img/emotion.png";
+import etc from "../img/etc.png";
+import exercise from "../img/exercise.png";
+import license from "../img/license.png";
+import lifestyle from "../img/lifestyle.png";
+import testTaker from "../img/testTaker.png";
 
 export default function CreateRoomPage () {
    
@@ -18,42 +28,42 @@ export default function CreateRoomPage () {
     const [entryFee, setEntryFee] = useState(5000);
     const [account, setAccount] = useState("");
     const [rule, setRule] = useState("R1");
-    const currentWeek = 1;
-    let participantID = '';
     const [roomCategory, setRoomCategory] = useState("");
     const [roomDescription, setRoomDescription] = useState("");
+    const [onStyle, setOnStyle] = useState('study');
 
+    const currentWeek = 1;
+    let participantID = '';
+    
+    const kindOfArray = {
+        ENTRYFEE: 5000,
+        PERSONNEL: 0,
+        PERIOD: 1
+    }
 
     const dateNum = moment(startDate).format('YYYY-MM-DD'); // 달력에서 선택한 날짜 포맷 2023-06-23
     const maxNum = Number(roomPersonnel); // 선택된 값 모두 서버에서 지정한 데이터 타입인 숫자로 변환
     const weekNum = Number(week);
     const feeNum = Number(entryFee);
 
-    console.log("시작 날짜: ", dateNum);
-    console.log("방 이름: ", roomName);
-    console.log("방 인원: ", roomPersonnel);
-    console.log("방 규칙 번호: ", rule);
-    console.log("방 카테고리: ", roomCategory);
-    console.log("방 소개글: ", roomDescription);
-
-    const createArray = (a) => {
+    const createArray = (kind) => {
         let arr = [];
-        if (a === 0)
+        if (kind === 0)
             for (let i = 1; i <= 6; i++)
                 arr.push(i);
-        else if (a === 1)
-            for (let i = a; i <= 48; i++)
+        else if (kind === 1)
+            for (let i = kind; i <= 48; i++)
                 arr.push(i);
         else 
-            for (let i = a; i <= 100000; i+=5000)
+            for (let i = kind; i <= 100000; i+=5000)
             arr.push(i);
 
         return arr;
     }
-    const arr0 = createArray(0);
-    const arr1 = createArray(1);
-    const arr2 = createArray(5000);
-    console.log(arr1, arr2);
+
+    const arrayAboutPersonnel = createArray(kindOfArray.PERSONNEL);
+    const arrayAboutPeriod = createArray(kindOfArray.PERIOD);
+    const arrayAboutEntryfee = createArray(kindOfArray.ENTRYFEE);
 
     const movePage = useNavigate();
     const backToHomePage = () => {
@@ -74,15 +84,12 @@ export default function CreateRoomPage () {
             room_category_code: roomCategory,
             description: roomDescription,
             }, {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}})
-
-            console.log('서버 응답 데이터: ', response);
             participantID = response.data.participant_id;
             try {
-                const response2 = await instance.post('/plans', {participant_id: participantID},
+                await instance.post('/plans', {participant_id: participantID},
                 {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`}});
                 console.log("방장 계획 데이터 공간 생성 완료!");
             }
-
             catch(error) {
                 console.log("방장 계획 데이터 공간 생성 실패!");
             }
@@ -109,8 +116,16 @@ export default function CreateRoomPage () {
     const ruleHandler2 = () => {
         setRule("R2");
     }
+    
+    const selectStyle = {
+        border: '3px solid',
+        borderRadius: '10px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        paddingBottom: '10px'
+    }
 
-    return ( // 주차는 48주까지 map으로 돌리기 참가비는 10만원까지 
+    return ( 
         <div>
             <span className="back" onClick={backToHomePage}><IoIosArrowBack size="50px"/></span>
             <h1 className="title">스터디룸 만들기</h1>
@@ -121,7 +136,17 @@ export default function CreateRoomPage () {
 
             <div>
                 <h3>방 카테고리</h3>
-                <input className="inputStyle" onChange={(e) => setRoomCategory(e.target.value)}></input>
+                <div className="flex-container">
+                    <div className="flex-item" onClick={() => {setRoomCategory('study'); setOnStyle('study'); }} style={onStyle === 'study' ? selectStyle : null}><img alt="study" src={study}/><p className="aboutCategory">공부</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('exercise'); setOnStyle('exercise');}} style={onStyle === 'exercise' ? selectStyle : null}><img alt="exercise" src={exercise}/><p className="aboutCategory">운동</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('coding'); setOnStyle('coding');}} style={onStyle === 'coding' ? selectStyle : null}><img alt="coding" src={coding}/><p className="aboutCategory">개발</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('diet'); setOnStyle('diet');}} style={onStyle === 'diet' ? selectStyle : null}><img alt="diet" src={diet}/><p className="aboutCategory">다이어트</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('emotion'); setOnStyle('emotion')}} style={onStyle === 'emotion' ? selectStyle : null}><img alt="emotion" src={emotion}/><p className="aboutCategory">정서관리</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('license'); setOnStyle('license');}} style={onStyle === 'license' ? selectStyle : null}><img alt="license" src={license}/><p className="aboutCategory">자격증</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('lifestyle'); setOnStyle('lifestyle')}} style={onStyle === 'lifestyle' ? selectStyle : null}><img alt="lifestyle" src={lifestyle}/><p className="aboutCategory">생활습관</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('testTaker'); setOnStyle('testTaker')}} style={onStyle === 'testTaker' ? selectStyle : null}><img alt="testTaker" src={testTaker}/><p className="aboutCategory">수험생</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('etc'); setOnStyle('etc');}} style={onStyle === 'etc' ? selectStyle : null}><img alt="etc" src={etc}/><p className="aboutCategory">기타</p></div>
+                </div>
             </div>
 
             <div>
@@ -131,7 +156,7 @@ export default function CreateRoomPage () {
 
             <div><h3>인원</h3>
             <select onChange={(e) => setRoomPersonnel(e.target.value)}>
-               {arr0.map((item) => <option value = {item} key = {item}>{item}명</option>)}
+               {arrayAboutPersonnel.map((item) => <option value = {item} key = {item}>{item}명</option>)}
             </select>
             </div>
 
@@ -143,14 +168,14 @@ export default function CreateRoomPage () {
             <div>
             <h3>기간 선택</h3> 
             <select onChange={(e) => setWeek(e.target.value)}>  
-               {arr1.map((item) => (<option value = {item} key = {item}>{item}주</option>))}
+               {arrayAboutPeriod.map((item) => (<option value = {item} key = {item}>{item}주</option>))}
             </select> 
             </div>
             
             <div>
             <h3>참가비</h3>
             <select onChange={(e) => setEntryFee(e.target.value)}>
-               {arr2.map((item) => <option value = {item} key = {item}>{item}원</option>)}
+               {arrayAboutEntryfee.map((item) => <option value = {item} key = {item}>{item}원</option>)}
             </select>
             </div>
 

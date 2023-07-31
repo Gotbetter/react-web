@@ -1,5 +1,4 @@
-import './RoomInformation.css';
-
+import '../componentsCssFile/RoomInformation.css';
 export default function RoomInformation ({title, maxUserNum, currentUserNum, startDate, account, roomCode}) {
     
     return (
