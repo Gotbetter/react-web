@@ -1,11 +1,13 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import instance from "../api/axios";
 import { useEffect, useState } from "react";
-import './AboutRoomPage.css';
+import '../pagesCssFile/AboutRoomPage.css';
 import Participants from "../components/Participants";
-import moment from "moment";
 import Ranking from "../components/Ranking";
 import RoomInformation from "../components/RoomInformation";
+import AboutDday from "../components/AboutDday";
+import AboutWeeks from "../components/AboutWeeks";
+import CurrentWeekPlan from "../components/CurrentWeekPlan";
 
 export default function AboutRoomPage () {
 
@@ -14,14 +16,19 @@ export default function AboutRoomPage () {
     const [participantsInfo, setParticipantsInfo] = useState([]);
     const [participantId, setParticipantId] = useState('');
     const [authId, setAuthId] = useState('');
-    const [dDay, setDday] =useState(0);
-    const [dDayToFixDay, setDdayToFixDay] = useState(0);
+    
     const [startDate, setStartDate] = useState('');
     const [targetDate, setTargetDate] = useState('');
     const [planId, setPlanId] = useState(0);
     const [currentWeekPlan, setCurrentWeekPlan] = useState([]);
-    const [rankingData, setRankingData] = useState([]);
+
+    const [userId, setUserId] = useState('');
     const roomId = location.state.roomId;
+
+    const movePage = useNavigate();
+    const moveToJoinPage = () => {
+        movePage('/joinPage', {state: {roomId: roomId, userId: userId}});
+    }
 
     const getInfo = async () => { // 방 정보 가져오는 함수
         try {
@@ -61,6 +68,7 @@ export default function AboutRoomPage () {
         try {
             const response = await instance.get('/users', {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}});
             setAuthId(response.data.auth_id);
+            setUserId(response.data.user_id);
         }
         catch(error){
             console.log('error~');
@@ -82,7 +90,7 @@ export default function AboutRoomPage () {
     }
    
     const getCurrentWeekPlan3 = async () => { // 가져온 참가자 목록
-        if (!participantId){
+        if (!participantId || roomInfor.current_week === undefined){
             return;
         }
         try{
@@ -121,75 +129,50 @@ export default function AboutRoomPage () {
         catch(error){
             console.log('세부 계획 가져오기 실패');
         }
-   }
-
-   const getDday = () => {
-        if (startDate === '' || targetDate === ''){
-            return;
-        }
-        const date0 = moment().format("YYYY-MM-DD");
-        const date1 = moment(targetDate);
-        const fixDay = moment(startDate).add(3, 'd');
-        console.log(fixDay);
-        const differ = date1.diff(date0, 'd');
-        const differ2 = fixDay.diff(date0, 'd');
-        console.log('differ', differ, differ2, '시작, 끝, fix', startDate, targetDate, fixDay);
-        setDday(differ);
-        setDdayToFixDay(differ2);
-   }
-
-   const getRanking = async () => {
-        try{
-            const response = await instance.get(`/rooms/${roomId}/rank`,
-            {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}});
-            console.log(response);
-            setRankingData(response.data);
-        }
-        catch(error){
-            console.log('get ranking error');
-        }
-   }
-    
-    useEffect(() => {getInfo(); getParticipantInfo(); getCurrentWeekPlan(); getRanking();}, []);
+    }
+   
+    useEffect(() => {getInfo(); getParticipantInfo(); getCurrentWeekPlan();}, []);
     useEffect(() => {getCurrentWeekPlan2();}, [participantsInfo, authId]);
     useEffect(() => {getCurrentWeekPlan3();}, [participantId]);
-    useEffect(() => {getDday();}, [startDate, targetDate]);
     useEffect(() => {getCurrentWeekPlan4();}, [planId]);
-
-    console.log('사용자 아이디:', authId, '사용자 목록:', participantsInfo, '방 정보:', roomInfor);
+    
     return (    
         <div className="mine">
-            <h1 className="roomTitle">{roomInfor.title}</h1>
-            <div className="sp"><h3><span className="sp1">전체 주차 : {roomInfor.week} </span> <span className="sp2">현재 주차 : {roomInfor.current_week}</span></h3></div>
            
-        <div className="dDay">
-            <span className="sp3">계획 고정까지 D-{dDayToFixDay}</span>
-            <span className="sp4">이번 계획 마감까지 D-{dDay}</span>
-        </div>
-
-        <div className="currentWeekPlan">
-            <h3>나의 이번 주 계획</h3>
-            {currentWeekPlan.map((item) => (<div>{item.content}</div>))}
-        </div>
-
-        <div className="party">
-            <h3>참가자</h3>
             <div>
-                {participantsInfo.map((item) => (<Participants key={item.userId} authId={item.authId} 
-                email={item.email} userName={item.userName} planId={planId} week={roomInfor.week} participantId={item.participantId}/>))}
+                <AboutWeeks title={roomInfor.title} allWeek={roomInfor.week} currentWeek={roomInfor.current_week}/>
             </div>
-        </div>
 
-        <div className="rank">
+            <div>
+                <AboutDday startDate={startDate} targetDate={targetDate}/>
+            </div>
+       
+            <div>
+                {<CurrentWeekPlan currentWeekPlan={currentWeekPlan}/>}
+            </div>
+
+            <div className="party">
+                <h3>참가자</h3>
+                <div className="fcontainer">
+                    {participantsInfo.map((item) => (<div className="par"><Participants key={item.userId}
+                    userName={item.userName} planId={planId} week={roomInfor.current_week} participantId={item.participantId}/></div>))}
+                </div>
+            </div>
+
+            <div className="rank">
                 <h3>현재 랭킹</h3>
-                {rankingData.map((item) => (<Ranking key={item.rank} userName={item.username} rank={item.rank} refund={item.refund}/>))}
-        </div>
+                <Ranking roomId={roomId}/>
+            </div>
 
-        <div className="roominformation">
-            <h3>방 정보</h3>
-            <RoomInformation title={roomInfor.title} maxUserNum={roomInfor.max_user_num} currentUserNum={roomInfor.current_user_num}
-            startDate={roomInfor.start_date} account={roomInfor.account} roomCode={roomInfor.room_code}/>
-        </div>
+            <div className="roominformation">
+                <h3>방 정보</h3>
+                <RoomInformation title={roomInfor.title} maxUserNum={roomInfor.max_user_num} currentUserNum={roomInfor.current_user_num}
+                startDate={roomInfor.start_date} account={roomInfor.account} roomCode={roomInfor.room_code}/>
+            </div>
+
+            <div>
+                <button className="joinbtn" onClick={moveToJoinPage}>방 참가 요청 수락하기</button>
+            </div>
 
         </div>
     )

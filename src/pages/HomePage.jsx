@@ -31,12 +31,10 @@ export default function HomePage () {
 
    async function getInfo() {
         try {
-            const response = await instance.get('/rooms',{headers: {
+            const response = await instance.get('/rooms', {headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,
               }, // 요청에 Header 추가
             });
-
-            console.log('room information : ',response.data);
              const _roomInfor = await response.data.map((item) => ({
                 room_id: item.room_id,
                 room_title: item.title,
@@ -55,7 +53,6 @@ export default function HomePage () {
         }
     }
     useEffect(() => {getInfo();}, []); // 방 정보 한번만 가져오도록 
-    //console.log("confirm : ", roomInfor);
 
     return (
         <div>

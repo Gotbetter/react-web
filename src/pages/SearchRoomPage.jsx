@@ -1,22 +1,17 @@
 import React, {useState} from "react";
 import instance from "../api/axios";
-import './SearchRoomPage.css';
+import '../pagesCssFile/SearchRoomPage.css';
 
 export default function SearchRoompage () {
    
     const [roomCode, setRoomCode] = useState('');
     const join = async () => {
         try{
-            const response = await instance.post('/participants', {
+            await instance.post('/participants', {
                 room_code: roomCode,}, {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}});
-            console.log(response.data);
             alert("참가 요청이 성공적으로 전송되었습니다!");
             
         } catch(error){
-            
-            console.log("error!");
-            console.log(error);
-            console.log(error.response.data.errors[0].errorMessage);
             if (roomCode === "")
                 alert("방 입장 코드를 입력해 주세요!");
             else if (error.response.data.errors[0].errorMessage === "Already exists data.")

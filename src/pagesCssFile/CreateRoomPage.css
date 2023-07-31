@@ -120,5 +120,28 @@ select{
     cursor: pointer;
 }
 
+.flex-container{
+    display: flex;
+    width: 600px;
+    padding-left: 35px;
+    flex-wrap: wrap;
+    position: relative;
+    right: 20px;
+    margin-top: 0;
+    padding-top: 0 !important;
+    border: 2px solid;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.flex-item{
+    margin: 20px;
+}
+
+.aboutCategory{
+    font-size: 15px;
+    text-align: center;
+}
 
 

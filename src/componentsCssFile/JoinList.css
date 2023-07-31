@@ -1,0 +1,26 @@
+.joinfor{
+    width: 100px;
+    position: relative;
+    left: 350px;
+    bottom: 30px;
+    height: 30px;
+    background-color: #555;
+    color: white;
+    border-radius: 10px;
+    margin-right: 20px;
+    
+}
+
+.joincontainer{
+    border: solid 3px;
+    width: 850px;
+    height: 70px;
+    padding-top: 20px;
+    position: relative;
+    left: 290px;
+    top: 20px;
+    padding-right: 100px;
+    margin-top: px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}

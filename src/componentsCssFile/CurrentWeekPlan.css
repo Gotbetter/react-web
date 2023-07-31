@@ -1,0 +1,21 @@
+.weekplan{
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 10px;
+    height: 40px;
+    padding-top: 10px;
+}
+.currentWeekPlan{
+    position: relative;
+    right: 20px;
+    top: 31px;
+    left: 70px;
+    padding-top: 20px;
+    border: solid 3px;
+    border-radius: 10px;
+    width: 350px;
+    height: 500px;
+    font-size: 20px;
+    bottom: 200px;
+}
+

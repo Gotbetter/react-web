@@ -10,6 +10,7 @@ import SearchRoomPage from "./pages/SearchRoomPage";
 import CreateRoomPage from "./pages/CreateRoomPage";
 import AboutRoomPage from "./pages/AboutRoomPage";
 import AboutDetailPlan from "./pages/AboutDetailPlan";
+import JoinPage from "./pages/JoinPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/createRoom" element={<CreateRoomPage />}/>
           <Route path="/aboutRoom" element={<AboutRoomPage />}/>
           <Route path="/detailPlan" element={<AboutDetailPlan />}/>
+          <Route path="/joinPage" element={<JoinPage />}/>
         </Routes>
         <Footer />
       </BrowserRouter>
