@@ -139,7 +139,7 @@ export default function CreateRoomPage () {
                 <div className="flex-container">
                     <div className="flex-item" onClick={() => {setRoomCategory('study'); setOnStyle('study'); }} style={onStyle === 'study' ? selectStyle : null}><img alt="study" src={study}/><p className="aboutCategory">공부</p></div>
                     <div className="flex-item" onClick={() => {setRoomCategory('exercise'); setOnStyle('exercise');}} style={onStyle === 'exercise' ? selectStyle : null}><img alt="exercise" src={exercise}/><p className="aboutCategory">운동</p></div>
-                    <div className="flex-item" onClick={() => {setRoomCategory('coding'); setOnStyle('coding');}} style={onStyle === 'coding' ? selectStyle : null}><img alt="coding" src={coding}/><p className="aboutCategory">개발</p></div>
+                    <div className="flex-item" onClick={() => {setRoomCategory('develop'); setOnStyle('develop');}} style={onStyle === 'develop' ? selectStyle : null}><img alt="coding" src={coding}/><p className="aboutCategory">개발</p></div>
                     <div className="flex-item" onClick={() => {setRoomCategory('diet'); setOnStyle('diet');}} style={onStyle === 'diet' ? selectStyle : null}><img alt="diet" src={diet}/><p className="aboutCategory">다이어트</p></div>
                     <div className="flex-item" onClick={() => {setRoomCategory('emotion'); setOnStyle('emotion')}} style={onStyle === 'emotion' ? selectStyle : null}><img alt="emotion" src={emotion}/><p className="aboutCategory">정서관리</p></div>
                     <div className="flex-item" onClick={() => {setRoomCategory('license'); setOnStyle('license');}} style={onStyle === 'license' ? selectStyle : null}><img alt="license" src={license}/><p className="aboutCategory">자격증</p></div>

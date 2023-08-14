@@ -155,7 +155,7 @@ export default function AboutRoomPage () {
                 <h3>참가자</h3>
                 <div className="fcontainer">
                     {participantsInfo.map((item) => (<div className="par"><Participants key={item.userId}
-                    userName={item.userName} planId={planId} week={roomInfor.current_week} participantId={item.participantId}/></div>))}
+                    userName={item.userName} planId={planId} week={roomInfor.current_week} participantId={item.participantId} authId={item.authId}/></div>))}
                 </div>
             </div>
 

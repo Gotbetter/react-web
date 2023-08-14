@@ -8,6 +8,7 @@ export default function DetailPlan ({week, participantId}) {
     const [contentList, setContentList] = useState([]);
     const [planId, setPlanId] =useState(0);
     const [planContent, setPlanContent] = useState('');
+    const [aboutDetailPlan, setAboutDetailPlan] = useState();
     
     const getDetailPlan = async () => {
         
@@ -38,8 +39,11 @@ export default function DetailPlan ({week, participantId}) {
    
     const createDetailPlan = async () => {
         try {
-            await instance.post(`plans/${planId}/details`, {content: planContent},
+            const response = await instance.post(`plans/${planId}/details`, {content: planContent},
             {headers: {Authorization: `Bearer ${localStorage.getItem("access_token")}`,}});
+            //console.log(response);
+            //setAboutDetailPlan(response.data);
+            
             window.location.reload();
         }
         catch(error){
@@ -63,12 +67,13 @@ export default function DetailPlan ({week, participantId}) {
             }
         }
     }
+    console.log(aboutDetailPlan);
     useEffect(() => {getDetailPlan();}, []);
     useEffect(() => {getDetailPlan2();}, [planId]);
     return (
         <div className='plans'>
             <h1>{week}주차 세부 계획</h1>
-            <div>{contentList.map((item) => (<ShowDetailPlan key={item.detail_plan_id} content={item.content}/>))}</div>
+            <div>{contentList.map((item) => (<ShowDetailPlan key={item.detail_plan_id} content={item.content} detailPlanId={item.detail_plan_id}/>))}</div>
             <input placeholder='세부 계획 내용을 입력하세요.' onChange={(e) => {setPlanContent(e.target.value)}} className='plansinput'></input>
             <button onClick={createDetailPlan} className='createbtn'>+</button>
         </div>

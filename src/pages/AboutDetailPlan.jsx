@@ -1,13 +1,14 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import '../pagesCssFile/AboutDetailPlan.css';
 import DetailPlan from '../components/DetailPlan';
 
 export default function AboutDetailPlan () {
     const location = useLocation();
+    
     const week = location.state.week;
     const participantId = location.state.participantId;
     const userName = location.state.userName;
-
+    
     const createArray = (week) => {
         let arr = [];
         for (let i=1; i<=week; i++){
