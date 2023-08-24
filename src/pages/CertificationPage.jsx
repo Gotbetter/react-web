@@ -16,7 +16,7 @@ export default function CertificationPage () {
         setMine(false);
         }
     }
-
+    
     
     useEffect(() => {isItMine();}, []);
     return (
